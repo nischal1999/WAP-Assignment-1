@@ -30,7 +30,10 @@
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center center;
-    color: whitesmoke;
     font-size: larger;
+    color: white;
 
+}
+a{
+    text-decoration: none;
 }
