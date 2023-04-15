@@ -54,9 +54,6 @@ const student1 = {
     this.computeAverageGrade=function(){
        return this.grades.reduce((a,c)=>a+c,0)/this.grades.length;
     }
-    this.sort=function(){
-        this.grades.sort;
-    }
   }
 
 const student4 = new Student("John", "Cena", [75, 85, 90, 92, 87]);
