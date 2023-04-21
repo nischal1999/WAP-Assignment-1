@@ -1,0 +1,25 @@
+1. Explain why do we want sometimes to use setImmediate instead of using setTimeout?
+
+==>SetImmediate is intended to take precedence over setTimeout in the event loop. 
+This means that the setImmediate callback will be executed first if you have both 
+the setTimeout and setSetImmediate callbacks scheduled to run at the same time. This 
+can be helpful in situations where you wish to guarantee that a specific action is 
+carried out with a greater priority in the event loop, such as when handling time-sensitive
+events or updating the user interface.
+
+2. Explain the difference between process.nextTick and setImmediate?
+
+==>process.nextTick callbacks have a higher priority than setImmediate callbacks. 
+This means that process.nextTick callbacks are executed before any I/O events or timers,
+whereas setImmediate callbacks are executed after I/O events.
+
+3. Does Node.js has window object?
+
+==>No, Node.js does not have a window object.Node.js, on the other hand, is a JavaScript runtime built
+ on the V8 JavaScript engine that allows you to run JavaScript code on the server-side. Since it does not
+ run on the browser, it doesn't have a window object. 
+
+
+
+
+
