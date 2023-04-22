@@ -1,11 +1,8 @@
 window.onload=function(){
-
     const checkElderyPatients=document.getElementById('chkElderlyPatients');
     const checkShowOutPatients=document.getElementById('chkShowOutPatients');
     const form=  document.getElementById('patientForm');
   
-
-
     form.addEventListener('submit', function (event) {
         event.preventDefault(); 
         const patientId = document.getElementById('patientIdNumber').value;
@@ -16,17 +13,14 @@ window.onload=function(){
         const department = document.getElementById('ddlDepartment').value;
         const isOutPatientRadioButton=document.getElementById('radioIsOutPatientYes');
         const isOutPatient= isOutPatientRadioButton.checked? "Yes":"No"
-         
-      
-        const ageDifMs = Date.now() - new Date(dateOfBirth).getTime();
-        const ageDate = new Date(ageDifMs); 
+        const ageDifference = Date.now() - new Date(dateOfBirth).getTime();
+        const ageDate = new Date(ageDifference); 
         const age = (ageDate.getUTCFullYear() - 1970);
         const newRow = document.createElement("tr");
 
-      if(age<65) newRow.classList.add("young-patient");
-      if(!isOutPatientRadioButton.checked) newRow.classList.add("in-patient");
-
-
+        if(age<65) newRow.classList.add("young");
+        if(!isOutPatientRadioButton.checked) newRow.classList.add("in");
+        
         newRow.innerHTML = `
         <td>${patientId}</td>
         <td>${firstName}</td>
@@ -38,31 +32,26 @@ window.onload=function(){
       `;
 
       document.getElementById("tbodyPatientsList").appendChild(newRow);
-      document.getElementById("btnReset").click();
+      form.reset();
    
     })
 
     checkElderyPatients.addEventListener('change',function(event){
-      const youngPatients = document.getElementsByClassName("young-patient");
+      const young = document.getElementsByClassName("young");
       const isChecked = event.currentTarget.checked;
       const chkShowOutPatients = document.getElementById('chkShowOutPatients');
 
-      for (let i = 0; i < youngPatients.length; i++) {
+      for (let i = 0; i < young.length; i++) {
           if(isChecked){
-              youngPatients[i].classList.add("hide");
+              young[i].classList.add("hide");
           }
           else{
-              if(!youngPatients[i].classList.contains("in-patient") 
-              || (youngPatients[i].classList.contains("in-patient") && !chkShowOutPatients.checked)){
-                  youngPatients[i].classList.remove("hide");
-              }
-          }
+              if(!young[i].classList.contains("in") || (young[i].classList.contains("in") && !chkShowOutPatients.checked)) young[i].classList.remove("hide");
       }
     });
 
     checkShowOutPatients.addEventListener('change',function(event){
-      const showInPatients=document.getElementsByClassName("in-patient");
-      const inPatients = document.getElementsByClassName("in-patient");
+      const inPatients = document.getElementsByClassName("in");
       const isChecked = event.currentTarget.checked;
       const elderlyChkbox = document.getElementById('chkElderlyPatients');
 
@@ -71,10 +60,7 @@ window.onload=function(){
               inPatients[i].classList.add("hide");
           }
           else{
-              if(!inPatients[i].classList.contains("young-patient") 
-                  || (inPatients[i].classList.contains("young-patient") && !elderlyChkbox.checked)){
-                      inPatients[i].classList.remove("hide");
-                  } 
+              if(!inPatients[i].classList.contains("young") || (inPatients[i].classList.contains("young") && !elderlyChkbox.checked))inPatients[i].classList.remove("hide");             
           }
       }
      
