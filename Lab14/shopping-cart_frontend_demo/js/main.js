@@ -36,24 +36,15 @@ function addNewProductRowToTable(product) {
     editButton.textContent = 'Update';
     editButton.addEventListener('click', () => editProduct(product));
     cell.appendChild(editButton);
-  
     const deleteButton = document.createElement('button');
     deleteButton.textContent = 'Delete';
     deleteButton.addEventListener('click', () => deleteProduct(product.id));
     cell.appendChild(deleteButton);
-  
     row.appendChild(cell);
     document.getElementById('tbodyProductList').appendChild(row);
-   
   }
-  
-  function editProduct(product) {
-    localStorage.setItem("product", JSON.stringify(product));
-    location.href = "add.html";
-  }
-  
   function deleteProduct(id) {
-    var result = confirm("Do you want to delete this product?");
+    let result = confirm("Do you want to delete this product?");
     if (result) {
         fetch(`http://localhost:3000/products/${id}`, {
         method: "DELETE",
@@ -65,4 +56,10 @@ function addNewProductRowToTable(product) {
         } 
         });
      }
+  }
+
+ 
+  function editProduct(product) {
+    localStorage.setItem("product", JSON.stringify(product));
+    location.href = "add.html";
   }
